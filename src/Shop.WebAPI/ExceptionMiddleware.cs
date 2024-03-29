@@ -1,4 +1,5 @@
 using System.Net;
+using Marten.Exceptions;
 using Shop.UseCases.Exceptions;
 
 namespace Shop.WebAPI;
@@ -19,7 +20,7 @@ public class ExceptionMiddleware
         {
             context.Response.StatusCode = (int) HttpStatusCode.NotFound;
         }
-        catch (OptimisticLockException)
+        catch (EventStreamUnexpectedMaxEventIdException)
         {
             context.Response.StatusCode = (int) HttpStatusCode.Conflict;
         }
